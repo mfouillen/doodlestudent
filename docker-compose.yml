@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+
+  front:
+    build: 
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+
+  api:
+    build:
+      context: ./api
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - 3004:3004
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    ports:
+      - "3307:3307"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tlc
+      - MYSQL_USER=tlc
+      - MYSQL_PASSWORD=tlc
+
+  etherpad:
+    image: etherpad/etherpad:latest
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./APIKEY.txt:/opt/etherpad-lite/APIKEY.txt
+      
+  mail:
+    image: bytemark/smtp
+    restart: always
+    ports:
+      - "2525:25"
