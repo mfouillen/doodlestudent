@@ -11,7 +11,7 @@ quarkus:
     username: tlc
     password: tlc
     jdbc:
-      url: jdbc:mysql://localhost:3306/tlc?useUnicode=true&serverTimezone=Europe/Paris
+      url: jdbc:mysql://db:3307/tlc?useUnicode=true&serverTimezone=Europe/Paris
       driver: com.mysql.cj.jdbc.Driver
   hibernate-orm:
     validate-in-dev-mode: false
@@ -24,7 +24,7 @@ quarkus:
   mailer:
     from: test@quarkus.io
 #    host: smtp.sendgrid.net
-    host: localhost
+    host: mail
     port: 2525
 #    port: 465
 #    ssl: true
